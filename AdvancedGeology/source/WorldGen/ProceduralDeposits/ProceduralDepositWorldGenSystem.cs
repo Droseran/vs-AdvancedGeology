@@ -2737,14 +2737,18 @@ public sealed partial class ProceduralDepositWorldGenSystem : ModSystem
     }
 
     /// <summary>
-    /// True when a nugget smelts into a vanilla metal, which is the only case that earns
-    /// loose surface nuggets. Mineral concentrates without a metal product are excluded.
+    /// Only copper, tin, bismuth, zinc, silver, and gold minerals seed surface bits.
+    /// Eligibility is independent of smelting recipes, including IndustrialStory processing.
     /// </summary>
-    internal static bool IsVanillaMetalProduct(string? smeltedPath)
+    internal static bool IsSurfaceNuggetOre(string? oreName)
     {
-        if (string.IsNullOrEmpty(smeltedPath)) return false;
-        return smeltedPath.StartsWith("ingot-", StringComparison.Ordinal)
-            || string.Equals(smeltedPath, "ironbloom", StringComparison.Ordinal);
+        return oreName is "nativecopper" or "malachite" or "azurite" or "chalcopyrite"
+            or "tetrahedrite" or "bornite" or "chalcocite"
+            or "cassiterite" or "stannite"
+            or "bismuthinite" or "nativebismuth"
+            or "sphalerite" or "smithsonite"
+            or "nativesilver" or "acanthite"
+            or "nativegold" or "electrum";
     }
 
     /// <summary>
@@ -2764,7 +2768,7 @@ public sealed partial class ProceduralDepositWorldGenSystem : ModSystem
     }
 
     /// <summary>
-    /// Resolves the loose surface block for an ore block, or 0 when the ore yields no vanilla metal.
+    /// Resolves the loose surface block for an explicitly eligible ore, or 0 if unavailable.
     /// </summary>
     private int GetSurfaceNuggetBlockId(int oreBlockId)
     {
@@ -2774,16 +2778,13 @@ public sealed partial class ProceduralDepositWorldGenSystem : ModSystem
         Block? ore = (uint)oreBlockId < (uint)serverApi!.World.Blocks.Count
             ? serverApi.World.Blocks[oreBlockId]
             : null;
-        if (ore?.Code != null && TryParseGradedOrePath(ore.Code.Path, out string oreName, out string rock))
+        if (ore?.Code != null
+            && TryParseGradedOrePath(ore.Code.Path, out string oreName, out string rock)
+            && IsSurfaceNuggetOre(oreName))
         {
-            Item? nugget = serverApi.World.GetItem(new AssetLocation(ore.Code.Domain, "nugget-" + oreName));
-            string? smeltedPath = nugget?.CombustibleProps?.SmeltedStack?.Code?.Path;
-            if (IsVanillaMetalProduct(smeltedPath))
-            {
-                Block? loose = serverApi.World.GetBlock(
-                    new AssetLocation(ore.Code.Domain, $"looseores-{oreName}-{rock}-free"));
-                if (loose?.Code != null) resolved = loose.BlockId;
-            }
+            Block? loose = serverApi.World.GetBlock(
+                new AssetLocation(ore.Code.Domain, $"looseores-{oreName}-{rock}-free"));
+            if (loose?.Code != null) resolved = loose.BlockId;
         }
 
         surfaceNuggetBlocks[oreBlockId] = resolved;
@@ -2791,8 +2792,8 @@ public sealed partial class ProceduralDepositWorldGenSystem : ModSystem
     }
 
     /// <summary>
-    /// Places loose surface nuggets above shallow smeltable ore, mirroring the vanilla surface
-    /// indicator but only when the ore itself lies within the configured depth of the surface.
+    /// Places loose surface bits above explicitly eligible shallow ore, mirroring the vanilla
+    /// surface indicator within the configured depth of the surface.
     /// </summary>
     private void PlaceSurfaceNuggets(
         IChunkColumnGenerateRequest request,
@@ -2852,7 +2853,7 @@ public sealed partial class ProceduralDepositWorldGenSystem : ModSystem
     }
 
     /// <summary>
-    /// Returns the loose block for the shallowest smeltable procedural ore inside the depth window.
+    /// Returns the loose block for the shallowest eligible procedural ore inside the depth window.
     /// </summary>
     private int FindShallowSurfaceNugget(
         IChunkColumnGenerateRequest request,
