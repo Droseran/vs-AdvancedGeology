@@ -17,6 +17,11 @@ namespace AdvancedGeology
         private Harmony? harmony;
         private const string ConfigFileName = "advancedgeology.json";
         private AdvancedGeologyConfig config = new();
+        private static readonly System.Runtime.CompilerServices.ConditionalWeakTable<IAsset, AppliedDepositData> appliedDeposits = new();
+        private sealed class AppliedDepositData
+        {
+            internal byte[]? Data;
+        }
 
         public override void StartPre(ICoreAPI api)
         {
@@ -62,6 +67,8 @@ namespace AdvancedGeology
             harmony = new Harmony("advancedgeology");
             harmony.CreateClassProcessor(typeof(Patch_ForestFloorSystem_CheckAndReplaceForestFloor)).Patch();
             ByproductPatches.Apply(harmony);
+            harmony.Patch(AccessTools.Method(typeof(GenDeposits), nameof(GenDeposits.initAssets)),
+                prefix: new HarmonyMethod(typeof(AdvancedGeologyModSystem), nameof(BeforeDepositAssets)));
             if (canJewelryEnabled)
             {
                 CanJewelryAcquisitionPatch.Apply(harmony, api);
@@ -96,12 +103,10 @@ namespace AdvancedGeology
             {
                 CanJewelryGemCompatibility.InitializeAndReconcile(api);
             }
-            if (api.Side == EnumAppSide.Server)
-            {
-                SuppressLegacyOreDeposits(api);
-            }
         }
 
+
+        private static void BeforeDepositAssets(ICoreServerAPI api) => SuppressLegacyOreDeposits(api);
 
 
         /// <summary>
@@ -125,6 +130,11 @@ namespace AdvancedGeology
             {
                 string path = location.Path.Replace('\\', '/').ToLowerInvariant();
                 if (!path.StartsWith("worldgen/deposits/", StringComparison.Ordinal)) continue;
+                AppliedDepositData applied = appliedDeposits.GetOrCreateValue(asset);
+                if (ReferenceEquals(applied.Data, asset.Data)) continue;
+                // Reload replaces Data even when the IAsset instance is reused.
+                try
+                {
 
                 if (IsSaltDomeDepositAssetPath(location))
                 {
@@ -167,6 +177,11 @@ namespace AdvancedGeology
 
                 asset.Data = emptyArray;
                 suppressedFiles++;
+                }
+                finally
+                {
+                    applied.Data = asset.Data;
+                }
             }
 
             api.Logger.VerboseDebug(

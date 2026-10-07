@@ -61,7 +61,7 @@
   {
     "op": "add",
     "path": "/requiredMiningTierByType/ore-*-bornite-*",
-    "value": 3,
+    "value": 2,
     "file": "game:blocktypes/stone/ore-graded.json"
   },
   {
