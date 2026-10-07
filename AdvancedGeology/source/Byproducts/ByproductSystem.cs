@@ -113,6 +113,32 @@ public static class ByproductSystem
         }
     }
 
+    internal static CompiledProceduralDeposit? GetBolivianSilverDeposit()
+    {
+        lock (RegistryLock)
+        {
+            DefinitionsByHash.TryGetValue(ProceduralDepositMath.HashString("bolivian-porphyry-tin"), out var compiled);
+            return compiled != null && compiled.TryGetByproductRule(compiled.GetSlotId(ProceduralMaterialSlots.Galena), out _)
+                ? compiled : null;
+        }
+    }
+
+    /// <summary>Adds missing Bolivian galena provenance without overwriting existing deposit records.</summary>
+    internal static bool TryRetrofitBolivianGalena(IWorldChunk chunk, int index3d, int blockId, CompiledProceduralDeposit compiled)
+    {
+        if (chunk is not IServerChunk serverChunk || (uint)index3d >= MaximumEntries
+            || !compiled.TryGetByproductSlotForBlock(blockId, out int slot)
+            || slot != compiled.GetSlotId(ProceduralMaterialSlots.Galena)) return false;
+        ProvenanceCache cache = GetCache(chunk, serverChunk);
+        lock (cache)
+        {
+            if (!cache.Valid || cache.Entries.ContainsKey(index3d)) return false;
+            cache.Entries.Add(index3d, new ProvenanceRecord(blockId, 0, compiled.CodeHash, slot));
+            cache.Dirty = true;
+            return true;
+        }
+    }
+
     /// <summary>Clears provenance when a caller overwrites a local chunk index without a compiled deposit.</summary>
     public static void ClearPlacement(IWorldChunk chunk, int index3d)
     {

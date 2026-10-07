@@ -101,6 +101,11 @@
     "weathering": {
       "enabled": false
     },
+    "byproducts": {
+      "galena": {
+        "Ag": [0.02, 0.07]
+      }
+    },
     "palette": {
       "replaceableRockVariants": [
         "andesite",
