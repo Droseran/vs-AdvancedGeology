@@ -3,7 +3,7 @@
   <PropertyGroup>
     <ModName>AdvancedGeology</ModName>
     <ModType>code</ModType>
-    <ModVersion>2.0.7</ModVersion>
+    <ModVersion>2.0.8</ModVersion>
     <ModId>advancedgeology</ModId>
     <Description>Overhauls ore generation to be highly realistic</Description>
     <Side>universal</Side>

@@ -126,8 +126,10 @@ namespace AdvancedGeology
             int suppressedSoilFiles = 0;
             int rescaledFiles = 0;
 
-            foreach ((AssetLocation location, IAsset asset) in api.Assets.AllAssets.ToArray())
+            // GetMany loads lazy assets before the processed-data identity check.
+            foreach (IAsset asset in api.Assets.GetMany("worldgen/deposits/"))
             {
+                AssetLocation location = asset.Location;
                 string path = location.Path.Replace('\\', '/').ToLowerInvariant();
                 if (!path.StartsWith("worldgen/deposits/", StringComparison.Ordinal)) continue;
                 AppliedDepositData applied = appliedDeposits.GetOrCreateValue(asset);
