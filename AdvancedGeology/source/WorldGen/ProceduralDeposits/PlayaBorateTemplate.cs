@@ -43,12 +43,6 @@ public sealed class PlayaBorateDefinition
     public double PlayaCenterSpread { get; set; } = 5.0;
 
     [JsonProperty]
-    public double BasinDepthMin { get; set; } = 2.4;
-
-    [JsonProperty]
-    public double BasinDepthMax { get; set; } = 4.4;
-
-    [JsonProperty]
     public double FanWidthMin { get; set; } = 12.0;
 
     [JsonProperty]
@@ -107,14 +101,11 @@ internal sealed class PlayaBoratePlan
 {
     private const ulong PlanSalt = 0x504C41594142524FUL; // "PLAYABRO"
 
-    // Local model floor: y < -30 is below the modelled basin fill (GRID_Y / 2).
-    private const double BottomY = -30.0;
-
-    // Basin limits.
+    // Basin limits, measured down from the column's top rock.
     private const double CrustDepthLimit = 1.6;
     private const double CrustPlayaMinimum = 0.22;
     private const double NoduleMinimumPlaya = 0.1;
-    private const double PlayaFillDepthLimit = 11.0;
+    internal const int PlayaFillDepthLimit = 11;
     private const double FanSuppressionThreshold = 0.12;
 
     private readonly ulong featureId;
@@ -126,7 +117,6 @@ internal sealed class PlayaBoratePlan
     private readonly double playaRadiusZ;
     private readonly double playaCx;
     private readonly double playaCz;
-    private readonly double basinDepth;
     private readonly double fanSide;
     private readonly double fanWidth;
     private readonly double sodiumBias;
@@ -166,7 +156,6 @@ internal sealed class PlayaBoratePlan
         double playaRadiusZ,
         double playaCx,
         double playaCz,
-        double basinDepth,
         double fanSide,
         double fanWidth,
         double sodiumBias,
@@ -181,7 +170,6 @@ internal sealed class PlayaBoratePlan
         this.playaRadiusZ = playaRadiusZ;
         this.playaCx = playaCx;
         this.playaCz = playaCz;
-        this.basinDepth = basinDepth;
         this.fanSide = fanSide;
         this.fanWidth = fanWidth;
         this.sodiumBias = sodiumBias;
@@ -203,7 +191,6 @@ internal sealed class PlayaBoratePlan
         double playaRadiusZ = random.Range(settings.PlayaRadiusZMin, settings.PlayaRadiusZMax);
         double playaCx = random.Range(-settings.PlayaCenterSpread, settings.PlayaCenterSpread);
         double playaCz = random.Range(-settings.PlayaCenterSpread, settings.PlayaCenterSpread);
-        double basinDepth = random.Range(settings.BasinDepthMin, settings.BasinDepthMax);
         double fanSide = random.Range(0.0, 1.0) < 0.5 ? -1.0 : 1.0;
         double fanWidth = random.Range(settings.FanWidthMin, settings.FanWidthMax);
         double sodiumBias = random.Range(settings.SodiumBiasMin, settings.SodiumBiasMax);
@@ -239,7 +226,6 @@ internal sealed class PlayaBoratePlan
             playaRadiusZ,
             playaCx,
             playaCz,
-            basinDepth,
             fanSide,
             fanWidth,
             sodiumBias,
@@ -267,36 +253,27 @@ internal sealed class PlayaBoratePlan
         return reach * lateral;
     }
 
-    /// <summary>
-    /// Model <c>getSurfaceElevation</c>, retained as the deposit's internal basin datum. The
-    /// playa floor is depressed by the basin depth and the fan builds a wedge above it.
-    /// </summary>
-    public double GetBasinDatum(double x, double z)
+    public bool CoversColumn(int worldX, int worldZ)
     {
-        double basin = 18.0 + 0.03 * x * fanSide
-            + Math.Sin(x * 0.05 + seed) * 1.2
-            + Math.Cos(z * 0.06 - seed * 0.3) * 1.0;
-        double playa = PlayaFactor(x, z);
-        return basin - basinDepth * Math.Pow(playa, 0.6) + FanFactor(x, z) * 5.5;
+        double x = worldX - originX;
+        double z = worldZ - originZ;
+        return FanFactor(x, z) <= FanSuppressionThreshold && PlayaFactor(x, z) > 0.0;
     }
 
-    public PlayaBorateSample Evaluate(int worldX, int worldY, int worldZ, int surfaceY = int.MaxValue)
+    /// <summary>
+    /// Classifies a voxel against the playa. <paramref name="datumY"/> is the top natural-rock Y of the column.
+    /// </summary>
+    public PlayaBorateSample Evaluate(int worldX, int worldY, int worldZ, int datumY)
     {
-        if (worldY > surfaceY) return default;
+        if (worldY > datumY) return default;
 
         double x = worldX - originX;
-        double y = worldY - originY;
         double z = worldZ - originZ;
-        if (y < BottomY) return default;
 
-        double datum = GetBasinDatum(x, z);
-        if (y > datum) return default;
-
-        // The alluvial fan buries the evaporite sequence: nothing precipitates.
         if (FanFactor(x, z) > FanSuppressionThreshold) return default;
 
         double playa = PlayaFactor(x, z);
-        double depth = datum - y;
+        double depth = datumY - worldY;
 
         if (playa <= 0.0) return default;
         if (depth > PlayaFillDepthLimit) return default;
@@ -317,7 +294,7 @@ internal sealed class PlayaBoratePlan
             }
         }
 
-        PlayaBorateZone nodule = SampleNodule(x, y, z, datum);
+        PlayaBorateZone nodule = SampleNodule(x, depth, z);
         if (nodule != PlayaBorateZone.None && playa > NoduleMinimumPlaya)
         {
             return new PlayaBorateSample(nodule, playa, depth, true);
@@ -327,14 +304,14 @@ internal sealed class PlayaBoratePlan
     }
 
     /// <summary><c>sampleNodule</c>: squashed spheroidal borate nodules.</summary>
-    private PlayaBorateZone SampleNodule(double x, double y, double z, double datum)
+    private PlayaBorateZone SampleNodule(double x, double depth, double z)
     {
         for (int i = 0; i < nodules.Length; i++)
         {
             Nodule n = nodules[i];
             double dx = (x - n.X) / n.Radius;
             double dz = (z - n.Z) / n.Radius;
-            double dy = (y - (datum - n.DepthBelow)) / (n.Radius * n.Squash);
+            double dy = (n.DepthBelow - depth) / (n.Radius * n.Squash);
             if (dx * dx + dy * dy + dz * dz <= 1.0) return n.Zone;
         }
 
@@ -393,8 +370,6 @@ internal sealed class PlayaBorateProceduralTemplate : IProceduralDepositTemplate
             && settings.PlayaRadiusXMax >= settings.PlayaRadiusXMin
             && settings.PlayaRadiusZMin > 0.0
             && settings.PlayaRadiusZMax >= settings.PlayaRadiusZMin
-            && settings.BasinDepthMin > 0.0
-            && settings.BasinDepthMax >= settings.BasinDepthMin
             && settings.FanWidthMin > 0.0
             && settings.FanWidthMax >= settings.FanWidthMin
             && settings.SodiumBiasMin >= 0.0
@@ -432,12 +407,8 @@ public sealed partial class ProceduralDepositWorldGenSystem
         int baseZ)
     {
         CompiledProceduralDeposit compiled = candidate.Compiled;
-        PlayaBorateDefinition settings = compiled.Definition.PlayaBorate;
         var plan = (PlayaBoratePlan)candidate.Plan!;
         ushort[] heightMap = request.Chunks[0].MapChunk.WorldGenTerrainHeightMap;
-        int worldHeight = serverApi!.World.BlockAccessor.MapSizeY;
-        int minimumY = GameMath.Clamp(candidate.Instance.CenterY - settings.VerticalHalfHeight, 1, worldHeight - 2);
-        int maximumPrototypeY = GameMath.Clamp(candidate.Instance.CenterY + settings.VerticalHalfHeight, 1, worldHeight - 2);
 
         int[] zoneSlots = BuildPlayaBorateZoneSlots(compiled);
 
@@ -448,11 +419,13 @@ public sealed partial class ProceduralDepositWorldGenSystem
             {
                 int worldZ = baseZ + localZ;
                 int surfaceY = heightMap[localZ * ChunkSize + localX];
-                int maximumY = Math.Min(surfaceY, maximumPrototypeY);
+                if (!plan.CoversColumn(worldX, worldZ)) continue;
+                if (!TryFindTopNaturalRock(compiled, request, localX, localZ, surfaceY, out int datumY)) continue;
+                int minimumY = Math.Max(1, datumY - PlayaBoratePlan.PlayaFillDepthLimit);
 
-                for (int y = minimumY; y <= maximumY; y++)
+                for (int y = minimumY; y <= datumY; y++)
                 {
-                    PlayaBorateSample sample = plan.Evaluate(worldX, y, worldZ, surfaceY);
+                    PlayaBorateSample sample = plan.Evaluate(worldX, y, worldZ, datumY);
                     if (sample.Zone == PlayaBorateZone.None) continue;
 
                     int targetSlot = zoneSlots[(int)sample.Zone];
@@ -476,6 +449,31 @@ public sealed partial class ProceduralDepositWorldGenSystem
                 }
             }
         }
+    }
+
+    private const int TopRockSearchDepth = 32;
+
+    private static bool TryFindTopNaturalRock(
+        CompiledProceduralDeposit compiled,
+        IChunkColumnGenerateRequest request,
+        int localX,
+        int localZ,
+        int surfaceY,
+        out int rockY)
+    {
+        int lowestY = Math.Max(1, surfaceY - TopRockSearchDepth);
+        for (int y = surfaceY; y >= lowestY; y--)
+        {
+            int chunkY = y / ChunkSize;
+            if ((uint)chunkY >= (uint)request.Chunks.Length) continue;
+            int index3d = (((y % ChunkSize) * ChunkSize) + localZ) * ChunkSize + localX;
+            if (!compiled.IsNaturalRock(request.Chunks[chunkY].Data.GetBlockIdUnsafe(index3d))) continue;
+            rockY = y;
+            return true;
+        }
+
+        rockY = 0;
+        return false;
     }
 
     private static int[] BuildPlayaBorateZoneSlots(CompiledProceduralDeposit compiled)

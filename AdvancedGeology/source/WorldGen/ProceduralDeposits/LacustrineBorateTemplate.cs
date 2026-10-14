@@ -146,6 +146,7 @@ internal sealed class LacustrineBoratePlan
 
     // Local model floor: y < -30 is below the modelled basin (GRID_Y / 2).
     private const double FloorY = -30.0;
+    internal const double BeddingWarpAmplitude = 0.8;
 
     private readonly int originX;
     private readonly int originY;
@@ -258,7 +259,7 @@ internal sealed class LacustrineBoratePlan
     {
         double along = x * cosStrike - z * sinStrike;
         double across = x * sinStrike + z * cosStrike;
-        return y - tanDip * across - Math.Sin(along * 0.055 + seed) * 0.8;
+        return y - tanDip * across - Math.Sin(along * 0.055 + seed) * BeddingWarpAmplitude;
     }
 
     public LacustrineBorateSample Evaluate(int worldX, int worldY, int worldZ, int surfaceY = int.MaxValue)
@@ -272,7 +273,7 @@ internal sealed class LacustrineBoratePlan
 
         double along = x * cosStrike - z * sinStrike;
         double across = x * sinStrike + z * cosStrike;
-        double stratY = y - tanDip * across - Math.Sin(along * 0.055 + seed) * 0.8;
+        double stratY = y - tanDip * across - Math.Sin(along * 0.055 + seed) * BeddingWarpAmplitude;
 
         if (Math.Abs(stratY - tuffMarkerLevel) < 0.3) return default;
         if (stratY <= claystoneBase || stratY >= claystoneTop) return default;
@@ -458,8 +459,17 @@ internal sealed class LacustrineBorateProceduralTemplate : IProceduralDepositTem
         return LacustrineBoratePlan.Create(instance, definition.LacustrineBorate);
     }
 
-    internal static bool ValidateSettings(LacustrineBorateDefinition settings, out string error)
+    /// <summary>Highest point of the claystone unit above the deposit centre.</summary>
+    internal static int GetUnitTopReach(LacustrineBorateDefinition settings)
     {
+        return (int)Math.Ceiling(settings.ClaystoneTop
+            + LacustrineBoratePlan.BeddingWarpAmplitude
+            + Math.Tan(settings.DipDegMax * Math.PI / 180.0) * settings.HorizontalRadius);
+    }
+
+    internal static bool ValidateSettings(ProceduralDepositDefinition definition, out string error)
+    {
+        LacustrineBorateDefinition settings = definition.LacustrineBorate;
         bool valid = (string.Equals(settings.Family, "borate", StringComparison.OrdinalIgnoreCase)
                 || string.Equals(settings.Family, "alum", StringComparison.OrdinalIgnoreCase))
             && settings.HorizontalRadius >= 16
@@ -489,13 +499,26 @@ internal sealed class LacustrineBorateProceduralTemplate : IProceduralDepositTem
             && settings.ClaystoneTop > settings.ClaystoneBase
             && settings.TuffMarkerLevel > settings.ClaystoneBase
             && settings.TuffMarkerLevel < settings.ClaystoneTop;
-        error = valid ? string.Empty : "invalid lacustrine evaporite settings";
-        return valid;
+        if (!valid)
+        {
+            error = "invalid lacustrine evaporite settings";
+            return false;
+        }
+
+        int topReach = GetUnitTopReach(settings);
+        if (definition.Placement.MinDepth < topReach)
+        {
+            error = $"lacustrine evaporite placement.minDepth must be at least {topReach} to bury the claystone unit";
+            return false;
+        }
+
+        error = string.Empty;
+        return true;
     }
 
     public bool Validate(ProceduralDepositDefinition definition, out string error)
     {
-        return ValidateSettings(definition.LacustrineBorate, out error)
+        return ValidateSettings(definition, out error)
             && string.Equals(definition.LacustrineBorate.Family, "borate", StringComparison.OrdinalIgnoreCase);
     }
 
@@ -527,7 +550,7 @@ internal sealed class LacustrineAlumProceduralTemplate : IProceduralDepositTempl
         LacustrineBoratePlan.Create(instance, definition.LacustrineBorate);
     public bool Validate(ProceduralDepositDefinition definition, out string error)
     {
-        return LacustrineBorateProceduralTemplate.ValidateSettings(definition.LacustrineBorate, out error)
+        return LacustrineBorateProceduralTemplate.ValidateSettings(definition, out error)
             && string.Equals(definition.LacustrineBorate.Family, "alum", StringComparison.OrdinalIgnoreCase);
     }
     public void Realize(ProceduralDepositWorldGenSystem system, in DepositCandidate candidate, IChunkColumnGenerateRequest request, int baseX, int baseZ) =>

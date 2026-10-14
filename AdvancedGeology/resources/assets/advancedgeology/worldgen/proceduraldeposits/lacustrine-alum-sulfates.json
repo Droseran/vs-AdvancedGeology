@@ -16,7 +16,7 @@
       "cellSize": 256,
       "chance": 0.266,
       "yMode": "surfaceDepth",
-      "minDepth": 7,
+      "minDepth": 12,
       "maxDepth": 20
     },
     "climate": {

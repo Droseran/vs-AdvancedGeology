@@ -2498,7 +2498,8 @@ public sealed partial class ProceduralDepositWorldGenSystem : ModSystem
 
         int rainRaw = (climate >> 8) & 0xff;
         int tempRaw = (climate >> 16) & 0xff;
-        double rainfall = Climate.GetRainFall(rainRaw, TerraGenConfig.seaLevel) / 255.0;
+        // Raw climate-map values: no sea-level or altitude adjustment.
+        double rainfall = rainRaw / 255.0;
         double temperature = Climate.GetScaledAdjustedTemperatureFloat(tempRaw, 0);
         return MatchesClimate(filter, rainfall, temperature);
     }
