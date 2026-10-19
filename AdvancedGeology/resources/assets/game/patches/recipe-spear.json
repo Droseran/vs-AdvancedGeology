@@ -1,0 +1,107 @@
+[
+  {
+    "op": "addeach",
+    "path": "/variantgroups/1/states/-",
+    "value": [
+      "amphibolite",
+      "dacite",
+      "greenstone",
+      "quartzite",
+      "rhyolite",
+      "tonalite",
+    ],
+    "file": "game:itemtypes/tool/spear.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/shapeByType/@spear-generic-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "value": { base: "item/tool/spear/stone" },
+    "file": "game:itemtypes/tool/spear.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/texturesByType/@spear-generic-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "value": {
+      "stone": { base: "block/stone/rock/{material}1" },
+    },
+    "file": "game:itemtypes/tool/spear.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/attackpowerbytype/@spear-generic-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "value": 1.75,
+    "file": "game:itemtypes/tool/spear.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/attributes/damageTierByType/@spear-generic-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "value": 0,
+    "file": "game:itemtypes/tool/spear.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/durabilitybytype/@spear-generic-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "value": 16,
+    "file": "game:itemtypes/tool/spear.json"
+  },
+  {
+    "op": "addeach",
+    "path": "/variantgroups/0/states/-",
+    "value": [
+      "amphibolite",
+      "dacite",
+      "greenstone",
+      "quartzite",
+      "rhyolite",
+      "tonalite",
+    ],
+    "file": "game:itemtypes/toolhead/spearhead.json"
+  },
+  {
+    "op": "addeach",
+    "path": "/ingredients/T/allowedVariants/-",
+    "value": [
+      "amphibolite",
+      "dacite",
+      "greenstone",
+      "quartzite",
+      "rhyolite",
+      "tonalite",
+    ],
+    "file": "game:recipes/grid/tool/spear.json"
+  },
+  {
+    "op": "addeach",
+    "path": "/ingredient/allowedVariants/-",
+    "value": [
+      "amphibolite",
+      "dacite",
+      "greenstone",
+      "quartzite",
+      "rhyolite",
+      "tonalite",
+    ],
+    "file": "game:recipes/knapping/stone-spear.json"
+  },
+  {
+    "op": "addeach",
+    "path": "/variantgroups/1/states/-",
+    "value": [
+      "amphibolite",
+      "dacite",
+      "greenstone",
+      "quartzite",
+      "rhyolite",
+      "tonalite",
+    ],
+    "file": "game:entities/nonliving/projectile/spear.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/client/texturesByType/@spear-generic-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "value": {
+      "material": { base: "block/stone/rock/{material}1" }
+    },
+    "file": "game:entities/nonliving/projectile/spear.json"
+  }
+]

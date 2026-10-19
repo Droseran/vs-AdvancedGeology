@@ -1,0 +1,89 @@
+[
+  {
+    "op": "addeach",
+    "path": "/variantgroups/0/states/-",
+    "value": [
+      "amphibolite",
+      "dacite",
+      "greenstone",
+      "quartzite",
+      "rhyolite",
+      "tonalite",
+    ],
+    "file": "game:itemtypes/tool/hoe.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/shapeByType/@hoe-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "value": { base: "item/tool/hoe-stone" },
+    "file": "game:itemtypes/tool/hoe.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/miningspeedbytype/@hoe-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "value": {
+      "soil": 1.8
+    },
+    "file": "game:itemtypes/tool/hoe.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/durabilitybytype/@hoe-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "value": 30,
+    "file": "game:itemtypes/tool/hoe.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/attackpowerbytype/@hoe-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "value": 1,
+    "file": "game:itemtypes/tool/hoe.json"
+  },
+  {
+    "op": "addeach",
+    "path": "/variantgroups/0/states/-",
+    "value": [
+      "amphibolite",
+      "dacite",
+      "greenstone",
+      "quartzite",
+      "rhyolite",
+      "tonalite",
+    ],
+    "file": "game:itemtypes/toolhead/hoehead.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/texturesByType/@hoehead-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "value": {
+      "material": { base: "block/stone/rock/{material}1" },
+      "string": { base: "block/transparent" },
+      "handle": { base: "block/transparent" }
+    },
+    "file": "game:itemtypes/toolhead/hoehead.json"
+  },
+  {
+    "op": "move",
+    "frompath": "/texturesByType/*",
+    "path": "/temp",
+    "file": "game:itemtypes/toolhead/hoehead.json",
+  },
+  {
+    "op": "move",
+    "frompath": "/temp",
+    "path": "/texturesByType/*",
+    "file": "game:itemtypes/toolhead/hoehead.json",
+  },
+  {
+    "op": "addeach",
+    "path": "/ingredient/allowedVariants/-",
+    "value": [
+      "amphibolite",
+      "dacite",
+      "greenstone",
+      "quartzite",
+      "rhyolite",
+      "tonalite",
+    ],
+    "file": "game:recipes/knapping/stone-hoe.json"
+  }
+]

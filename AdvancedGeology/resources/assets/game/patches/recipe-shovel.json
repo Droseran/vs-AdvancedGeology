@@ -1,0 +1,112 @@
+[
+  {
+    "op": "addeach",
+    "path": "/variantgroups/0/states/-",
+    "value": [
+      "amphibolite",
+      "dacite",
+      "greenstone",
+      "quartzite",
+      "rhyolite",
+      "tonalite",
+    ],
+    "file": "game:itemtypes/tool/shovel.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/shapeByType/@shovel-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "value": { base: "item/tool/shovel-stone" },
+    "file": "game:itemtypes/tool/shovel.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/texturesByType/@shovel-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "value": {
+      "material": { base: "block/stone/rock/{material}1" },
+    },
+    "file": "game:itemtypes/tool/shovel.json"
+  },
+  {
+    "op": "move",
+    "frompath": "/texturesByType/*",
+    "path": "/temp",
+    "file": "game:itemtypes/tool/shovel.json",
+  },
+  {
+    "op": "move",
+    "frompath": "/temp",
+    "path": "/texturesByType/*",
+    "file": "game:itemtypes/tool/shovel.json",
+  },
+  {
+    "op": "addmerge",
+    "path": "/miningspeedbytype/@shovel-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "value": {
+      "soil": 2.2,
+      "sand": 2.2,
+      "gravel": 1.9,
+      "snow": 1.9
+    },
+    "file": "game:itemtypes/tool/shovel.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/attackpowerbytype/@shovel-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "value": 0.75,
+    "file": "game:itemtypes/tool/shovel.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/durabilitybytype/@shovel-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "value": 60,
+    "file": "game:itemtypes/tool/shovel.json"
+  },
+  {
+    "op": "addeach",
+    "path": "/variantgroups/0/states/-",
+    "value": [
+      "amphibolite",
+      "dacite",
+      "greenstone",
+      "quartzite",
+      "rhyolite",
+      "tonalite",
+    ],
+    "file": "game:itemtypes/toolhead/shovelhead.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/texturesByType/@shovelhead-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "value": {
+      "material": { base: "block/stone/rock/{material}1" },
+      "string": { base: "block/transparent" },
+      "handle": { base: "block/transparent" }
+    },
+    "file": "game:itemtypes/toolhead/shovelhead.json"
+  },
+  {
+    "op": "move",
+    "frompath": "/texturesByType/*",
+    "path": "/temp",
+    "file": "game:itemtypes/toolhead/shovelhead.json",
+  },
+  {
+    "op": "move",
+    "frompath": "/temp",
+    "path": "/texturesByType/*",
+    "file": "game:itemtypes/toolhead/shovelhead.json",
+  },
+  {
+    "op": "addeach",
+    "path": "/ingredient/allowedVariants/-",
+    "value": [
+      "amphibolite",
+      "dacite",
+      "greenstone",
+      "quartzite",
+      "rhyolite",
+      "tonalite",
+    ],
+    "file": "game:recipes/knapping/stone-shovel.json"
+  }
+]

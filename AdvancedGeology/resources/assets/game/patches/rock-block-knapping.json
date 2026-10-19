@@ -1,0 +1,92 @@
+[
+  {
+    "op": "addmerge",
+    "path": "/textures/amphibolite",
+    "value": { "base": "block/stone/rock/amphibolite1" },
+    "file": "game:blocktypes/stone/knappingsurface.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/textures/dacite",
+    "value": { "base": "block/stone/rock/dacite1" },
+    "file": "game:blocktypes/stone/knappingsurface.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/textures/greenstone",
+    "value": { "base": "block/stone/rock/greenstone1" },
+    "file": "game:blocktypes/stone/knappingsurface.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/textures/quartzite",
+    "value": { "base": "block/stone/rock/quartzite1" },
+    "file": "game:blocktypes/stone/knappingsurface.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/textures/rhyolite",
+    "value": { "base": "block/stone/rock/rhyolite1" },
+    "file": "game:blocktypes/stone/knappingsurface.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/textures/tonalite",
+    "value": { "base": "block/stone/rock/tonalite1" },
+    "file": "game:blocktypes/stone/knappingsurface.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/attributesByType/stone-amphibolite",
+    "value": {
+      "knappable": true,
+      "reinforcementStrength": 50
+    },
+    "file": "game:itemtypes/resource/stone.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/attributesByType/stone-dacite",
+    "value": {
+      "knappable": true,
+      "reinforcementStrength": 50
+    },
+    "file": "game:itemtypes/resource/stone.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/attributesByType/stone-greenstone",
+    "value": {
+      "knappable": true,
+      "reinforcementStrength": 50
+    },
+    "file": "game:itemtypes/resource/stone.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/attributesByType/stone-quartzite",
+    "value": {
+      "knappable": true,
+      "reinforcementStrength": 50
+    },
+    "file": "game:itemtypes/resource/stone.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/attributesByType/stone-rhyolite",
+    "value": {
+      "knappable": true,
+      "reinforcementStrength": 50
+    },
+    "file": "game:itemtypes/resource/stone.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/attributesByType/stone-tonalite",
+    "value": {
+      "knappable": true,
+      "reinforcementStrength": 50
+    },
+    "file": "game:itemtypes/resource/stone.json"
+  }
+]

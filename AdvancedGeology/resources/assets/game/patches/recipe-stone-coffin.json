@@ -1,0 +1,38 @@
+[
+  {
+    "op": "addeach",
+    "path": "/variantgroups/0/states/-",
+    "value": [
+      "quartzite",
+      "tonalite"
+    ],
+    "file": "game:blocktypes/stone/cementationfurnace/stonecoffin.json"
+  },
+  {
+    "op": "addeach",
+    "path": "/variantgroups/0/states/-",
+    "value": [
+      "quartzite",
+      "tonalite"
+    ],
+    "file": "game:blocktypes/stone/cementationfurnace/stonecoffinlid.json"
+  },
+  {
+    "op": "addeach",
+    "path": "/ingredients/S/allowedVariants/-",
+    "value": [
+      "quartzite",
+      "tonalite"
+    ],
+    "file": "game:recipes/grid/stonecoffin.json"
+  },
+  {
+    "op": "addeach",
+    "path": "/ingredients/S/allowedVariants/-",
+    "value": [
+      "quartzite",
+      "tonalite"
+    ],
+    "file": "game:recipes/grid/stonecoffinlid.json"
+  }
+]

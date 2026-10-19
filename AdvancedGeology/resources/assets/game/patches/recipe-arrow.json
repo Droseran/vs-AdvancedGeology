@@ -1,0 +1,143 @@
+[
+  {
+    "op": "addeach",
+    "path": "/variantgroups/0/states/-",
+    "value": [
+      "quartzite",
+      "rhyolite",
+    ],
+    "file": "game:itemtypes/tool/arrow.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/shapeByType/@arrow-(quartzite|rhyolite)",
+    "value": { base: "item/tool/arrow-stone" },
+    "file": "game:itemtypes/tool/arrow.json"
+  },
+  {
+    "op": "move",
+    "frompath": "/shapeByType/*",
+    "path": "/temp",
+    "file": "game:itemtypes/tool/arrow.json",
+  },
+  {
+    "op": "move",
+    "frompath": "/temp",
+    "path": "/shapeByType/*",
+    "file": "game:itemtypes/tool/arrow.json",
+  },
+  {
+    "op": "addmerge",
+    "path": "/texturesByType/@arrow-(quartzite|rhyolite)",
+    "value": {
+      "material": { base: "block/stone/rock/{material}1" }
+    },
+    "file": "game:itemtypes/tool/arrow.json"
+  },
+  {
+    "op": "move",
+    "frompath": "/texturesByType/*",
+    "path": "/temp",
+    "file": "game:itemtypes/tool/arrow.json",
+  },
+  {
+    "op": "move",
+    "frompath": "/temp",
+    "path": "/texturesByType/*",
+    "file": "game:itemtypes/tool/arrow.json",
+  },
+  {
+    "op": "addeach",
+    "path": "/variantgroups/0/states/-",
+    "value": [
+      "quartzite",
+      "rhyolite",
+    ],
+    "file": "game:itemtypes/toolhead/arrowhead.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/texturesByType/@arrowhead-(quartzite|rhyolite)",
+    "value": {
+      "material": { base: "block/stone/rock/{material}1" }
+    },
+    "file": "game:itemtypes/toolhead/arrowhead.json"
+  },
+  {
+    "op": "move",
+    "frompath": "/texturesByType/*",
+    "path": "/temp",
+    "file": "game:itemtypes/toolhead/arrowhead.json",
+  },
+  {
+    "op": "move",
+    "frompath": "/temp",
+    "path": "/texturesByType/*",
+    "file": "game:itemtypes/toolhead/arrowhead.json",
+  },
+  {
+    "op": "addmerge",
+    "path": "/attributes/forgableByType/@arrowhead-(quartzite|rhyolite)",
+    "value": false,
+    "file": "game:itemtypes/toolhead/arrowhead.json"
+  },
+  {
+    "op": "move",
+    "frompath": "/attributes/forgableByType/*",
+    "path": "/temp",
+    "file": "game:itemtypes/toolhead/arrowhead.json",
+  },
+  {
+    "op": "move",
+    "frompath": "/temp",
+    "path": "/attributes/forgableByType/*",
+    "file": "game:itemtypes/toolhead/arrowhead.json",
+  },
+  {
+    "op": "addeach",
+    "path": "/variantgroups/0/states/-",
+    "value": [
+      "quartzite",
+      "rhyolite",
+    ],
+    "file": "game:entities/nonliving/projectile/arrow.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/client/shapeByType/@arrow-(quartzite|rhyolite)",
+    "value": { base: "entity/nonliving/projectile/arrow/stone" },
+    "file": "game:entities/nonliving/projectile/arrow.json"
+  },
+  {
+    "op": "move",
+    "frompath": "/client/shapeByType/*",
+    "path": "/temp",
+    "file": "game:entities/nonliving/projectile/arrow.json",
+  },
+  {
+    "op": "move",
+    "frompath": "/temp",
+    "path": "/client/shapeByType/*",
+    "file": "game:entities/nonliving/projectile/arrow.json",
+  },
+  {
+    "op": "addmerge",
+    "path": "/client/texturesByType/@arrow-(quartzite|rhyolite)",
+    "value": {
+      "material": { base: "block/stone/rock/{material}1" }
+    },
+    "file": "game:entities/nonliving/projectile/arrow.json"
+  },
+  {
+    "op": "move",
+    "frompath": "/client/texturesByType/*",
+    "path": "/temp",
+    "file": "game:entities/nonliving/projectile/arrow.json",
+  },
+  {
+    "op": "move",
+    "frompath": "/temp",
+    "path": "/client/texturesByType/*",
+    "file": "game:entities/nonliving/projectile/arrow.json",
+  }
+]

@@ -1,0 +1,179 @@
+[
+  {
+    "op": "addeach",
+    "path": "/variantgroups/0/states/-",
+    "value": [
+      "amphibolite",
+      "dacite",
+      "greenstone",
+      "quartzite",
+      "rhyolite",
+      "tonalite",
+      "bone-amphibolite",
+      "bone-dacite",
+      "bone-greenstone",
+      "bone-quartzite",
+      "bone-rhyolite",
+      "bone-tonalite",
+    ],
+    "file": "game:itemtypes/tool/axe-stone.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/texturesByType/axe-bone-amphibolite",
+    "value": {
+      "material": { base: "block/stone/rock/amphibolite1" },
+      "handle": { base: "block/creature/bone-yellow" }
+    },
+    "file": "game:itemtypes/tool/axe-stone.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/texturesByType/axe-bone-dacite",
+    "value": {
+      "material": { base: "block/stone/rock/dacite1" },
+      "handle": { base: "block/creature/bone-yellow" }
+    },
+    "file": "game:itemtypes/tool/axe-stone.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/texturesByType/axe-bone-greenstone",
+    "value": {
+      "material": { base: "block/stone/rock/greenstone1" },
+      "handle": { base: "block/creature/bone-yellow" }
+    },
+    "file": "game:itemtypes/tool/axe-stone.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/texturesByType/axe-bone-quartzite",
+    "value": {
+      "material": { base: "block/stone/rock/quartzite1" },
+      "handle": { base: "block/creature/bone-yellow" }
+    },
+    "file": "game:itemtypes/tool/axe-stone.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/texturesByType/axe-bone-rhyolite",
+    "value": {
+      "material": { base: "block/stone/rock/rhyolite1" },
+      "handle": { base: "block/creature/bone-yellow" }
+    },
+    "file": "game:itemtypes/tool/axe-stone.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/texturesByType/axe-bone-tonalite",
+    "value": {
+      "material": { base: "block/stone/rock/tonalite1" },
+      "handle": { base: "block/creature/bone-yellow" }
+    },
+    "file": "game:itemtypes/tool/axe-stone.json"
+  },
+  {
+    "op": "move",
+    "frompath": "/texturesByType/*",
+    "path": "/temp",
+    "file": "game:itemtypes/tool/axe-stone.json",
+  },
+  {
+    "op": "move",
+    "frompath": "/temp",
+    "path": "/texturesByType/*",
+    "file": "game:itemtypes/tool/axe-stone.json",
+  },
+  {
+    "op": "addmerge",
+    "path": "/durabilitybytype/axe-bone-*",
+    "value": 60,
+    "file": "game:itemtypes/tool/axe-stone.json"
+  },
+  {
+    "op": "move",
+    "frompath": "/durabilitybytype/*",
+    "path": "/temp",
+    "file": "game:itemtypes/tool/axe-stone.json",
+  },
+  {
+    "op": "move",
+    "frompath": "/temp",
+    "path": "/durabilitybytype/*",
+    "file": "game:itemtypes/tool/axe-stone.json",
+  },
+  {
+    "op": "addeach",
+    "path": "/variantgroups/0/states/-",
+    "value": [
+      "amphibolite",
+      "dacite",
+      "greenstone",
+      "quartzite",
+      "rhyolite",
+      "tonalite",
+    ],
+    "file": "game:itemtypes/toolhead/axehead.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/texturesByType/@axehead-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "value": {
+      "material": { base: "block/stone/rock/{material}1" },
+      "string": { base: "block/transparent" },
+      "handle": { base: "block/transparent" }
+    },
+    "file": "game:itemtypes/toolhead/axehead.json"
+  },
+  {
+    "op": "move",
+    "frompath": "/texturesByType/*",
+    "path": "/temp",
+    "file": "game:itemtypes/toolhead/axehead.json",
+  },
+  {
+    "op": "move",
+    "frompath": "/temp",
+    "path": "/texturesByType/*",
+    "file": "game:itemtypes/toolhead/axehead.json",
+  },
+  {
+    "op": "addeach",
+    "path": "/1/ingredients/T/allowedVariants/-",
+    "value": [
+      "amphibolite",
+      "dacite",
+      "greenstone",
+      "quartzite",
+      "rhyolite",
+      "tonalite",
+    ],
+    "file": "game:recipes/grid/tool/axe.json"
+  },
+  {
+    "op": "addeach",
+    "path": "/2/ingredients/T/allowedVariants/-",
+    "value": [
+      "amphibolite",
+      "dacite",
+      "greenstone",
+      "quartzite",
+      "rhyolite",
+      "tonalite",
+    ],
+    "file": "game:recipes/grid/tool/axe.json"
+  },
+  {
+    "op": "addeach",
+    "path": "/ingredient/allowedVariants/-",
+    "value": [
+      "amphibolite",
+      "dacite",
+      "greenstone",
+      "quartzite",
+      "rhyolite",
+      "tonalite",
+    ],
+    "file": "game:recipes/knapping/stone-hatchet.json"
+  }
+]

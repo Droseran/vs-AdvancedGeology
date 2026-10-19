@@ -1,0 +1,224 @@
+[
+  {
+    "op": "addeach",
+    "path": "/variantgroups/1/states/-",
+    "value": [
+      "amphibolite",
+      "dacite",
+      "greenstone",
+      "quartzite",
+      "rhyolite",
+      "tonalite",
+      "boneamphibolite",
+      "bonedacite",
+      "bonegreenstone",
+      "bonequartzite",
+      "bonerhyolite",
+      "bonetonalite",
+    ],
+    "file": "game:itemtypes/tool/knife.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/shapeByType/@knife-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "value": { base: "item/tool/knife/stone" },
+    "file": "game:itemtypes/tool/knife.json"
+  },
+  {
+    "op": "move",
+    "frompath": "/shapeByType/*",
+    "path": "/temp",
+    "file": "game:itemtypes/tool/knife.json",
+  },
+  {
+    "op": "move",
+    "frompath": "/temp",
+    "path": "/shapeByType/*",
+    "file": "game:itemtypes/tool/knife.json",
+  },
+  {
+    "op": "addmerge",
+    "path": "/texturesByType/@knife-generic-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "value": {
+      "material": { base: "block/stone/rock/{material}1" },
+    },
+    "file": "game:itemtypes/tool/knife.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/texturesByType/knife-generic-boneamphibolite",
+    "value": {
+      "material": { base: "block/stone/rock/amphibolite1" },
+      "handle": { base: "block/creature/bone-yellow" },
+    },
+    "file": "game:itemtypes/tool/knife.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/texturesByType/knife-generic-bonedacite",
+    "value": {
+      "material": { base: "block/stone/rock/dacite1" },
+      "handle": { base: "block/creature/bone-yellow" },
+    },
+    "file": "game:itemtypes/tool/knife.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/texturesByType/knife-generic-bonegreenstone",
+    "value": {
+      "material": { base: "block/stone/rock/greenstone1" },
+      "handle": { base: "block/creature/bone-yellow" },
+    },
+    "file": "game:itemtypes/tool/knife.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/texturesByType/knife-generic-bonequartzite",
+    "value": {
+      "material": { base: "block/stone/rock/quartzite1" },
+      "handle": { base: "block/creature/bone-yellow" },
+    },
+    "file": "game:itemtypes/tool/knife.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/texturesByType/knife-generic-bonerhyolite",
+    "value": {
+      "material": { base: "block/stone/rock/rhyolite1" },
+      "handle": { base: "block/creature/bone-yellow" },
+    },
+    "file": "game:itemtypes/tool/knife.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/texturesByType/knife-generic-bonetonalite",
+    "value": {
+      "material": { base: "block/stone/rock/tonalite1" },
+      "handle": { base: "block/creature/bone-yellow" },
+    },
+    "file": "game:itemtypes/tool/knife.json"
+  },
+  {
+    "op": "move",
+    "frompath": "/texturesByType/knife-generic-*",
+    "path": "/temp",
+    "file": "game:itemtypes/tool/knife.json",
+  },
+  {
+    "op": "move",
+    "frompath": "/temp",
+    "path": "/texturesByType/knife-generic-*",
+    "file": "game:itemtypes/tool/knife.json",
+  },
+  {
+    "op": "addmerge",
+    "path": "/durabilitybytype/@knife-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "value": 90,
+    "file": "game:itemtypes/tool/knife.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/durabilitybytype/@knife-bone(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "value": 110,
+    "file": "game:itemtypes/tool/knife.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/miningspeedbytype/@knife-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "value": {
+      "plant": 1
+    },
+    "file": "game:itemtypes/tool/knife.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/miningspeedbytype/@knife-bone(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "value": {
+      "plant": 1
+    },
+    "file": "game:itemtypes/tool/knife.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/attackpowerbytype/@knife-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "value": 0.75,
+    "file": "game:itemtypes/tool/knife.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/attackpowerbytype/@knife-bone(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "value": 0.75,
+    "file": "game:itemtypes/tool/knife.json"
+  },
+  {
+    "op": "addeach",
+    "path": "/variantgroups/0/states/-",
+    "value": [
+      "amphibolite",
+      "dacite",
+      "greenstone",
+      "quartzite",
+      "rhyolite",
+      "tonalite",
+    ],
+    "file": "game:itemtypes/toolhead/knifeblade.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/texturesByType/@knifeblade-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "value": {
+      "material": { base: "block/stone/rock/{material}1" }
+    },
+    "file": "game:itemtypes/toolhead/knifeblade.json"
+  },
+  {
+    "op": "move",
+    "frompath": "/texturesByType/*",
+    "path": "/temp",
+    "file": "game:itemtypes/toolhead/knifeblade.json",
+  },
+  {
+    "op": "move",
+    "frompath": "/temp",
+    "path": "/texturesByType/*",
+    "file": "game:itemtypes/toolhead/knifeblade.json",
+  },
+  {
+    "op": "addmerge",
+    "path": "/-",
+    "value": {
+      ingredientPattern: "T	B",
+      ingredients: {
+        "T": { type: "item", code: "knifeblade-{stone}" },
+        "B": { type: "item", code: "bone" }
+      },
+      "allowedVariants": {
+        "stone": [
+          "amphibolite",
+          "dacite",
+          "greenstone",
+          "quartzite",
+          "rhyolite",
+          "tonalite",
+        ],
+      },
+      width: 1,
+      height: 2,
+      output: { type: "item", code: "knife-generic-bone{stone}", quantity: 1  }
+    },
+    "file": "game:recipes/grid/tool/knife.json"
+  },
+  {
+    "op": "addeach",
+    "path": "/ingredient/allowedVariants/-",
+    "value": [
+      "amphibolite",
+      "dacite",
+      "greenstone",
+      "quartzite",
+      "rhyolite",
+      "tonalite",
+    ],
+    "file": "game:recipes/knapping/stone-knife.json"
+  }
+]
