@@ -13,6 +13,12 @@
   },
   {
     "op": "addmerge",
+    "path": "/textures/diorite",
+    "value": { "base": "block/stone/rock/diorite1" },
+    "file": "game:blocktypes/stone/knappingsurface.json"
+  },
+  {
+    "op": "addmerge",
     "path": "/textures/greenstone",
     "value": { "base": "block/stone/rock/greenstone1" },
     "file": "game:blocktypes/stone/knappingsurface.json"
@@ -47,6 +53,15 @@
   {
     "op": "addmerge",
     "path": "/attributesByType/stone-dacite",
+    "value": {
+      "knappable": true,
+      "reinforcementStrength": 50
+    },
+    "file": "game:itemtypes/resource/stone.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/attributesByType/stone-diorite",
     "value": {
       "knappable": true,
       "reinforcementStrength": 50

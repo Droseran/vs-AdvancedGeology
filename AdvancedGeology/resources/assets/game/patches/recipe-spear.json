@@ -5,6 +5,7 @@
     "value": [
       "amphibolite",
       "dacite",
+      "diorite",
       "greenstone",
       "quartzite",
       "rhyolite",
@@ -14,13 +15,13 @@
   },
   {
     "op": "addmerge",
-    "path": "/shapeByType/@spear-generic-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "path": "/shapeByType/@spear-generic-(amphibolite|dacite|diorite|greenstone|quartzite|rhyolite|tonalite)",
     "value": { base: "item/tool/spear/stone" },
     "file": "game:itemtypes/tool/spear.json"
   },
   {
     "op": "addmerge",
-    "path": "/texturesByType/@spear-generic-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "path": "/texturesByType/@spear-generic-(amphibolite|dacite|diorite|greenstone|quartzite|rhyolite|tonalite)",
     "value": {
       "stone": { base: "block/stone/rock/{material}1" },
     },
@@ -28,19 +29,19 @@
   },
   {
     "op": "addmerge",
-    "path": "/attackpowerbytype/@spear-generic-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "path": "/attackpowerbytype/@spear-generic-(amphibolite|dacite|diorite|greenstone|quartzite|rhyolite|tonalite)",
     "value": 1.75,
     "file": "game:itemtypes/tool/spear.json"
   },
   {
     "op": "addmerge",
-    "path": "/attributes/damageTierByType/@spear-generic-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "path": "/attributes/damageTierByType/@spear-generic-(amphibolite|dacite|diorite|greenstone|quartzite|rhyolite|tonalite)",
     "value": 0,
     "file": "game:itemtypes/tool/spear.json"
   },
   {
     "op": "addmerge",
-    "path": "/durabilitybytype/@spear-generic-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "path": "/durabilitybytype/@spear-generic-(amphibolite|dacite|diorite|greenstone|quartzite|rhyolite|tonalite)",
     "value": 16,
     "file": "game:itemtypes/tool/spear.json"
   },
@@ -50,6 +51,7 @@
     "value": [
       "amphibolite",
       "dacite",
+      "diorite",
       "greenstone",
       "quartzite",
       "rhyolite",
@@ -63,6 +65,7 @@
     "value": [
       "amphibolite",
       "dacite",
+      "diorite",
       "greenstone",
       "quartzite",
       "rhyolite",
@@ -76,6 +79,7 @@
     "value": [
       "amphibolite",
       "dacite",
+      "diorite",
       "greenstone",
       "quartzite",
       "rhyolite",
@@ -89,6 +93,7 @@
     "value": [
       "amphibolite",
       "dacite",
+      "diorite",
       "greenstone",
       "quartzite",
       "rhyolite",
@@ -98,7 +103,7 @@
   },
   {
     "op": "addmerge",
-    "path": "/client/texturesByType/@spear-generic-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "path": "/client/texturesByType/@spear-generic-(amphibolite|dacite|diorite|greenstone|quartzite|rhyolite|tonalite)",
     "value": {
       "material": { base: "block/stone/rock/{material}1" }
     },

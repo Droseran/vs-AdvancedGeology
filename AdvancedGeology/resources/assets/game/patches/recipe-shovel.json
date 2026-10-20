@@ -5,6 +5,7 @@
     "value": [
       "amphibolite",
       "dacite",
+      "diorite",
       "greenstone",
       "quartzite",
       "rhyolite",
@@ -14,13 +15,13 @@
   },
   {
     "op": "addmerge",
-    "path": "/shapeByType/@shovel-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "path": "/shapeByType/@shovel-(amphibolite|dacite|diorite|greenstone|quartzite|rhyolite|tonalite)",
     "value": { base: "item/tool/shovel-stone" },
     "file": "game:itemtypes/tool/shovel.json"
   },
   {
     "op": "addmerge",
-    "path": "/texturesByType/@shovel-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "path": "/texturesByType/@shovel-(amphibolite|dacite|diorite|greenstone|quartzite|rhyolite|tonalite)",
     "value": {
       "material": { base: "block/stone/rock/{material}1" },
     },
@@ -40,7 +41,7 @@
   },
   {
     "op": "addmerge",
-    "path": "/miningspeedbytype/@shovel-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "path": "/miningspeedbytype/@shovel-(amphibolite|dacite|diorite|greenstone|quartzite|rhyolite|tonalite)",
     "value": {
       "soil": 2.2,
       "sand": 2.2,
@@ -51,13 +52,13 @@
   },
   {
     "op": "addmerge",
-    "path": "/attackpowerbytype/@shovel-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "path": "/attackpowerbytype/@shovel-(amphibolite|dacite|diorite|greenstone|quartzite|rhyolite|tonalite)",
     "value": 0.75,
     "file": "game:itemtypes/tool/shovel.json"
   },
   {
     "op": "addmerge",
-    "path": "/durabilitybytype/@shovel-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "path": "/durabilitybytype/@shovel-(amphibolite|dacite|diorite|greenstone|quartzite|rhyolite|tonalite)",
     "value": 60,
     "file": "game:itemtypes/tool/shovel.json"
   },
@@ -67,6 +68,7 @@
     "value": [
       "amphibolite",
       "dacite",
+      "diorite",
       "greenstone",
       "quartzite",
       "rhyolite",
@@ -76,7 +78,7 @@
   },
   {
     "op": "addmerge",
-    "path": "/texturesByType/@shovelhead-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "path": "/texturesByType/@shovelhead-(amphibolite|dacite|diorite|greenstone|quartzite|rhyolite|tonalite)",
     "value": {
       "material": { base: "block/stone/rock/{material}1" },
       "string": { base: "block/transparent" },
@@ -102,6 +104,7 @@
     "value": [
       "amphibolite",
       "dacite",
+      "diorite",
       "greenstone",
       "quartzite",
       "rhyolite",

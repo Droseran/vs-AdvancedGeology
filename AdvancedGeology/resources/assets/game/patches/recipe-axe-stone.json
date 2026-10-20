@@ -5,12 +5,14 @@
     "value": [
       "amphibolite",
       "dacite",
+      "diorite",
       "greenstone",
       "quartzite",
       "rhyolite",
       "tonalite",
       "bone-amphibolite",
       "bone-dacite",
+      "bone-diorite",
       "bone-greenstone",
       "bone-quartzite",
       "bone-rhyolite",
@@ -32,6 +34,15 @@
     "path": "/texturesByType/axe-bone-dacite",
     "value": {
       "material": { base: "block/stone/rock/dacite1" },
+      "handle": { base: "block/creature/bone-yellow" }
+    },
+    "file": "game:itemtypes/tool/axe-stone.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/texturesByType/axe-bone-diorite",
+    "value": {
+      "material": { base: "block/stone/rock/diorite1" },
       "handle": { base: "block/creature/bone-yellow" }
     },
     "file": "game:itemtypes/tool/axe-stone.json"
@@ -108,6 +119,7 @@
     "value": [
       "amphibolite",
       "dacite",
+      "diorite",
       "greenstone",
       "quartzite",
       "rhyolite",
@@ -117,7 +129,7 @@
   },
   {
     "op": "addmerge",
-    "path": "/texturesByType/@axehead-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "path": "/texturesByType/@axehead-(amphibolite|dacite|diorite|greenstone|quartzite|rhyolite|tonalite)",
     "value": {
       "material": { base: "block/stone/rock/{material}1" },
       "string": { base: "block/transparent" },
@@ -143,6 +155,7 @@
     "value": [
       "amphibolite",
       "dacite",
+      "diorite",
       "greenstone",
       "quartzite",
       "rhyolite",
@@ -156,6 +169,7 @@
     "value": [
       "amphibolite",
       "dacite",
+      "diorite",
       "greenstone",
       "quartzite",
       "rhyolite",
@@ -169,6 +183,7 @@
     "value": [
       "amphibolite",
       "dacite",
+      "diorite",
       "greenstone",
       "quartzite",
       "rhyolite",

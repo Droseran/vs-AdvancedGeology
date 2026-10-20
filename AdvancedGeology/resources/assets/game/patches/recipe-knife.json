@@ -5,12 +5,14 @@
     "value": [
       "amphibolite",
       "dacite",
+      "diorite",
       "greenstone",
       "quartzite",
       "rhyolite",
       "tonalite",
       "boneamphibolite",
       "bonedacite",
+      "bonediorite",
       "bonegreenstone",
       "bonequartzite",
       "bonerhyolite",
@@ -20,7 +22,7 @@
   },
   {
     "op": "addmerge",
-    "path": "/shapeByType/@knife-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "path": "/shapeByType/@knife-(amphibolite|dacite|diorite|greenstone|quartzite|rhyolite|tonalite)",
     "value": { base: "item/tool/knife/stone" },
     "file": "game:itemtypes/tool/knife.json"
   },
@@ -38,7 +40,7 @@
   },
   {
     "op": "addmerge",
-    "path": "/texturesByType/@knife-generic-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "path": "/texturesByType/@knife-generic-(amphibolite|dacite|diorite|greenstone|quartzite|rhyolite|tonalite)",
     "value": {
       "material": { base: "block/stone/rock/{material}1" },
     },
@@ -56,6 +58,15 @@
   {
     "op": "addmerge",
     "path": "/texturesByType/knife-generic-bonedacite",
+    "value": {
+      "material": { base: "block/stone/rock/dacite1" },
+      "handle": { base: "block/creature/bone-yellow" },
+    },
+    "file": "game:itemtypes/tool/knife.json"
+  },
+  {
+    "op": "addmerge",
+    "path": "/texturesByType/knife-generic-bonediorite",
     "value": {
       "material": { base: "block/stone/rock/dacite1" },
       "handle": { base: "block/creature/bone-yellow" },
@@ -112,19 +123,19 @@
   },
   {
     "op": "addmerge",
-    "path": "/durabilitybytype/@knife-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "path": "/durabilitybytype/@knife-(amphibolite|dacite|diorite|greenstone|quartzite|rhyolite|tonalite)",
     "value": 90,
     "file": "game:itemtypes/tool/knife.json"
   },
   {
     "op": "addmerge",
-    "path": "/durabilitybytype/@knife-bone(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "path": "/durabilitybytype/@knife-bone(amphibolite|dacite|diorite|greenstone|quartzite|rhyolite|tonalite)",
     "value": 110,
     "file": "game:itemtypes/tool/knife.json"
   },
   {
     "op": "addmerge",
-    "path": "/miningspeedbytype/@knife-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "path": "/miningspeedbytype/@knife-(amphibolite|dacite|diorite|greenstone|quartzite|rhyolite|tonalite)",
     "value": {
       "plant": 1
     },
@@ -132,7 +143,7 @@
   },
   {
     "op": "addmerge",
-    "path": "/miningspeedbytype/@knife-bone(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "path": "/miningspeedbytype/@knife-bone(amphibolite|dacite|diorite|greenstone|quartzite|rhyolite|tonalite)",
     "value": {
       "plant": 1
     },
@@ -140,13 +151,13 @@
   },
   {
     "op": "addmerge",
-    "path": "/attackpowerbytype/@knife-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "path": "/attackpowerbytype/@knife-(amphibolite|dacite|diorite|greenstone|quartzite|rhyolite|tonalite)",
     "value": 0.75,
     "file": "game:itemtypes/tool/knife.json"
   },
   {
     "op": "addmerge",
-    "path": "/attackpowerbytype/@knife-bone(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "path": "/attackpowerbytype/@knife-bone(amphibolite|dacite|diorite|greenstone|quartzite|rhyolite|tonalite)",
     "value": 0.75,
     "file": "game:itemtypes/tool/knife.json"
   },
@@ -156,6 +167,7 @@
     "value": [
       "amphibolite",
       "dacite",
+      "diorite",
       "greenstone",
       "quartzite",
       "rhyolite",
@@ -165,7 +177,7 @@
   },
   {
     "op": "addmerge",
-    "path": "/texturesByType/@knifeblade-(amphibolite|dacite|greenstone|quartzite|rhyolite|tonalite)",
+    "path": "/texturesByType/@knifeblade-(amphibolite|dacite|diorite|greenstone|quartzite|rhyolite|tonalite)",
     "value": {
       "material": { base: "block/stone/rock/{material}1" }
     },
@@ -196,6 +208,7 @@
         "stone": [
           "amphibolite",
           "dacite",
+          "diorite",
           "greenstone",
           "quartzite",
           "rhyolite",
@@ -214,6 +227,7 @@
     "value": [
       "amphibolite",
       "dacite",
+      "diorite",
       "greenstone",
       "quartzite",
       "rhyolite",
